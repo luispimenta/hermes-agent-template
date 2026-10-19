@@ -17,6 +17,10 @@ ENVIRONMENT = PAYLOAD / "venv"
 WRAPPER = PAYLOAD / "wrapper-venv"
 EXTRAS = ("all", "messaging", "tts-premium", "bedrock", "anthropic", "edge-tts", "vision")
 
+# The build script is copied to /app and invoked by absolute path, so Python's
+# import path starts at /app rather than the Hermes checkout.
+sys.path.insert(0, str(SOURCE))
+
 
 def run(*args: str | Path, **kwargs) -> None:
     subprocess.run([str(arg) for arg in args], cwd=SOURCE, check=True, **kwargs)
