@@ -48,7 +48,6 @@ ARG HERMES_REF=v0.22.2
 ENV HERMES_REF=${HERMES_REF} \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONPATH=/opt/hermes/repo \
     HERMES_RUNTIME_DIR=/opt/hermes/tools \
     LD_LIBRARY_PATH=/usr/local/lib \
     CC=gcc CXX=g++ \
@@ -73,7 +72,6 @@ RUN ln -sf libsqlite3.so.3.53.4 /usr/local/lib/libsqlite3.so.0 && \
 # /opt/hermes-agent remains available as a compatibility link after assembly.
 RUN git clone --depth 1 --branch "${HERMES_REF}" \
         https://github.com/NousResearch/hermes-agent.git /opt/hermes/repo && \
-    test -f /opt/hermes/repo/pm/__init__.py && \
     if [ "${HERMES_REF}" = v0.22.2 ]; then \
         test "$(git -C /opt/hermes/repo rev-parse HEAD)" = \
             d923a5eb487a17c0a68801bba9ef0f56c81040a8; \
