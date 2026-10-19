@@ -44,7 +44,8 @@ RUN apt-get -o Acquire::Retries=3 update && \
 
 FROM debian:13.4@sha256:e2d08da6f42ef4b09b165d55528a12727aeed8240dc9edf888e3ec07e10ef9da
 
-ENV HERMES_REF=v0.22.2 \
+ARG HERMES_REF=v0.22.2
+ENV HERMES_REF=${HERMES_REF} \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONPATH=/opt/hermes/repo \
